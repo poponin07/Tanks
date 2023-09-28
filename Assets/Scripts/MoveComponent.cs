@@ -10,7 +10,7 @@ namespace Tanks
 
         public void OnMove(DirectionType type)
         {
-            transform.position = Extensions.ConvertTypeFromDirection(type) * (m_speed * Time.deltaTime);
+            transform.position += Extensions.ConvertTypeFromDirection(type) * (m_speed * Time.deltaTime);
             transform.eulerAngles = Extensions.ConvertTypeFromDRotation(type);
         }
     }

@@ -41,7 +41,7 @@ public class Extensions : MonoBehaviour
         return m_directions.First(t => t.Value == dir).Key;
     }
     
-    public static DirectionType ConvertRotationFromType(Vector3 rotation) =>
+    public static DirectionType ConvertRotationFromType( Vector3 rotation) =>
         m_rotation.First(t => t.Value == rotation).Key;
     
 
