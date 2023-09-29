@@ -18,8 +18,7 @@ public class FireComponent : MonoBehaviour
         if (!m_canFire) return;
         m_canFire = false;
         var bullet = Instantiate(m_prefab, transform.position, transform.rotation);
-       //bullet.Se(Extensions.ConvertDirectionFromType(transform.eulerAngles),m_side);
-       bullet.GetComponent<ProjectileComponent>().SetParams(Extensions.ConvertDirectionFromType(transform.eulerAngles),m_side);
+        bullet.GetComponent<ProjectileComponent>().SetParams(Extensions.ConvertRotationFromType(transform.eulerAngles),m_side);
         StartCoroutine(СooldownFire());
     }
 

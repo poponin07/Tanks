@@ -37,9 +37,7 @@ public class InputComponent : MonoBehaviour
         {
             type = m_lastType;
         }
-        
         else if (direction.x == 0f && direction.y == 0f) return;
-        
         else type = m_lastType = Extensions.ConvertDirectionFromType(direction);
         
         m_moveComp.OnMove(type);

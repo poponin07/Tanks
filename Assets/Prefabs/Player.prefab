@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 794137415051779973}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,4 +255,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 20
+  m_enemyManagerComponent: {fileID: 0}
+  m_startPoint: {fileID: 0}
   m_timeImmortal: 3

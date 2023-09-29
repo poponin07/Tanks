@@ -9,13 +9,22 @@ namespace Tanks
     public class PlayerConditionComponent : ConditionComponent
     {
         private bool m_isImmortal;
-        private Vector3 m_startPoint;
+        [SerializeField] private Transform m_startPoint;
         private SpriteRenderer m_render;
         [SerializeField, Range(0.1f, 5)] private float m_timeImmortal = 3f;
         private float m_immortalSwitchVisual = 0.2f;
+
+        public Transform StartPoint
+        {
+            set {
+                if (value.GetComponent<SpawnPointComponent>().GetIsPlayerSpawnPoint)
+                {
+                    m_startPoint = value;
+                }
+            }
+        }
         private void Start()
         {
-            m_startPoint = transform.position;
             m_render = GetComponent<SpriteRenderer>();
         }
 
@@ -24,7 +33,7 @@ namespace Tanks
             if (m_isImmortal) return;
             
             m_health -= damage;
-            transform.position = m_startPoint; 
+            transform.position = m_startPoint.position; 
             Coroutine immortalCor = StartCoroutine(OnImmortal());
             
             if (m_health <= 0f)
