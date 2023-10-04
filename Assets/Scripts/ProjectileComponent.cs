@@ -35,12 +35,11 @@ public class ProjectileComponent : MonoBehaviour
         var fire = col.GetComponent<FireComponent>();
         if (fire != null)
         {
-            Debug.Log(fire.GetSide);
-            Debug.Log(m_side);
             if (fire.GetSide == m_side) return;
 
             var condition = fire.GetComponent<ConditionComponent>();
             condition.SetDamage(m_damage);
+            
             Destroy(gameObject);
             return;
         }

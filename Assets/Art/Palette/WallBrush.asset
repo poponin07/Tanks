@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdc5e1eccedb29e4894bbfab99032590, type: 3}
-  m_Name: WaterRandomBrush
+  m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
+  m_Name: WallBrush
   m_EditorClassIdentifier: 
   m_Cells:
   - m_Tile: {fileID: 0}
@@ -36,7 +36,5 @@ MonoBehaviour:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
   m_Anchor: {x: 0.5, y: 0.5, z: 0.5}
-  m_Prefabs:
-  - {fileID: 4785747101917661449, guid: 46ea65ae3839ce941ab1407e28a0b5a6, type: 3}
-  - {fileID: 6987307413439776962, guid: 390fa27416c5ee343a1a6f60499da5b8, type: 3}
-  m_PerlinScale: 0.5
+  m_Prefab: {fileID: 8295797606007468896, guid: d670af243491557449f0ad85e8e49252,
+    type: 3}

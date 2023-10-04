@@ -13,5 +13,7 @@ namespace Tanks
             transform.position += Extensions.ConvertTypeFromDirection(type) * (m_speed * Time.deltaTime);
             transform.eulerAngles = Extensions.ConvertTypeFromDRotation(type);
         }
+        
+        
     }
 }

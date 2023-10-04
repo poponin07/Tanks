@@ -9,27 +9,28 @@ namespace Tanks
     {
         [SerializeField] private List<GameObject> m_enemyes;
         [SerializeField] private List<SpawnPointComponent> m_spawnPointComponents;
-        [SerializeField, Range(1, 3)] private int m_maxEnemy = 1;
+        [SerializeField, Range(1, 3)] private int m_maxEnemy = 3;
         [SerializeField] private GameObject m_enemyPrefab;
         private List<Transform> m_spawnPoints;
 
         private void Start()
         {
-            AddEnemy();
+            AddEnemy(m_maxEnemy);
         }
 
-        public void RemoveEnemy(GameObject enemy)
+        public void RemoveEnemy(GameObject enemy) 
         {
             m_enemyes.Remove(enemy.gameObject);
-            if (m_maxEnemy < m_enemyes.Count)
+            Destroy(enemy);
+            if (m_maxEnemy > m_enemyes.Count)
             {
-                AddEnemy();
+                AddEnemy(1);
             }
         }
 
-        private void AddEnemy()
+        private void AddEnemy( int countEnemy)
         {
-            StartCoroutine(SpawnEnemy(m_maxEnemy));
+            StartCoroutine(SpawnEnemy(countEnemy));
         }
 
         private SpawnPointComponent GetFreeSpawnPoint()
@@ -57,6 +58,7 @@ namespace Tanks
                 } while (res == null);
 
                 GameObject enemy = Instantiate(m_enemyPrefab, res.transform.position, Quaternion.identity);
+                enemy.GetComponent<ConditionComponent>().EnemyManagerComponent = this;
                 m_enemyes.Add(enemy);
             }
         }

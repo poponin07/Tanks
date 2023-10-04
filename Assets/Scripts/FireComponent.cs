@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 namespace Tanks
@@ -10,8 +12,18 @@ public class FireComponent : MonoBehaviour
     [SerializeField] private GameObject m_prefab;
     [SerializeField] private SideType m_side;
     private bool m_canFire = true;
+    private bool m_isBot;
 
     public SideType GetSide => m_side;
+
+    private void Start()
+    {
+        if (GetComponent<BotComponent>() == true)
+        {
+            m_isBot = true;
+            OnFire();
+        }
+    }
 
     public void OnFire()
     {
@@ -27,7 +39,7 @@ public class FireComponent : MonoBehaviour
         m_canFire = false;
         yield return new WaitForSeconds(m_delayFire);
         m_canFire = true;
-
+        if (m_isBot)  OnFire();
     }
 }
 }

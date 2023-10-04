@@ -9,12 +9,14 @@ namespace Tanks
     [RequireComponent(typeof(MoveComponent),typeof(FireComponent) )]
 public class InputComponent : MonoBehaviour
 {
-    private DirectionType m_lastType;
+    private DirectionType m_lastType = DirectionType.Up;
     private MoveComponent m_moveComp;
     private FireComponent m_fireComp;
 
     [SerializeField] private InputAction m_move;
     [SerializeField] private InputAction m_fire;
+
+    public Transform rayPoint;
 
     private void Start()
     {
@@ -39,10 +41,29 @@ public class InputComponent : MonoBehaviour
         }
         else if (direction.x == 0f && direction.y == 0f) return;
         else type = m_lastType = Extensions.ConvertDirectionFromType(direction);
-        
         m_moveComp.OnMove(type);
     }
 
+    private void LateUpdate()
+    {
+        Ray1();
+    }
+
+    private void Ray1()
+    {
+        Vector3 vec = Extensions.ConvertTypeFromDirection(m_lastType);
+            RaycastHit2D hit = Physics2D.Raycast(rayPoint.position, new Vector3(vec.x, vec.y), 100f);
+            BotComponent bot = hit.collider.gameObject.GetComponent<BotComponent>();
+                if (bot != null)
+                {
+                    Vector3 direction = Extensions.ConvertTypeFromDirection(m_lastType);
+                    direction = new Vector3(direction.x * -1f,  direction.y * -1f, 0f);
+                    DirectionType directionType = Extensions.ConvertDirectionFromType(direction);
+                    bot.isLookAtPlayer = true;
+                    bot.Verrt(directionType);
+                }
+            
+    }
     private void OnDestroy()
     {
         m_move.Disable();

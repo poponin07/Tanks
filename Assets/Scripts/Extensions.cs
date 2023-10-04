@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -41,8 +40,16 @@ public class Extensions : MonoBehaviour
     public static Vector3 ConvertTypeFromDRotation(DirectionType type) => m_rotation[type];
     public static DirectionType ConvertRotationFromType( Vector3 rotation) =>
         m_rotation.First(t => t.Value == rotation).Key;
-    
 
+    public static DirectionType GetRandomDirecrion()
+    {
+        return m_directions.ElementAt(Random.Range(0, m_directions.Count)).Key;
+    }
+    
+    public static Vector3 GetRandomRotatin()
+    {
+        return m_rotation.ElementAt(Random.Range(0, m_rotation.Count)).Value;
+    }
 }
 public enum DirectionType : byte
 {

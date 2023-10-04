@@ -11,7 +11,7 @@ namespace Tanks
         private bool m_isImmortal;
         [SerializeField] private Transform m_startPoint;
         private SpriteRenderer m_render;
-        [SerializeField, Range(0.1f, 5)] private float m_timeImmortal = 3f;
+        [SerializeField, Range(0.1f, 5)] private float m_timeImmortal = 2f;
         private float m_immortalSwitchVisual = 0.2f;
 
         public Transform StartPoint
@@ -28,6 +28,8 @@ namespace Tanks
             m_render = GetComponent<SpriteRenderer>();
         }
 
+        
+
         public override void SetDamage(int damage)
         {
             if (m_isImmortal) return;
@@ -43,13 +45,15 @@ namespace Tanks
             }
         }
 
+        
+        
         private IEnumerator OnImmortal()
         {
             m_isImmortal = true;
             var time = m_timeImmortal;
            while (time > 0)
            {
-               time -= Time.deltaTime;
+               time -= m_immortalSwitchVisual;
                m_render.enabled = !m_render.enabled;
                yield return new WaitForSeconds(m_immortalSwitchVisual);
                
