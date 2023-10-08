@@ -25,7 +25,7 @@ public class FireComponent : MonoBehaviour
         }
     }
 
-    public void OnFire()
+    public void OnFire() //стрельба
     {
         if (!m_canFire) return;
         m_canFire = false;
@@ -34,7 +34,7 @@ public class FireComponent : MonoBehaviour
         StartCoroutine(СooldownFire());
     }
 
-    IEnumerator СooldownFire()
+    IEnumerator СooldownFire() //перезарядка стрельбы
     {
         m_canFire = false;
         yield return new WaitForSeconds(m_delayFire);

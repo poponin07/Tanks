@@ -13,9 +13,9 @@ namespace Tanks
         private MoveComponent m_moveComponent;
         private FireComponent m_fireComponent;
         private DirectionType m_direction;
-        private Collider2D curHit;
-        public bool isLookAtPlayer;
-        public Transform rayPoint;
+        private Collider2D curHit; //текущий хит рейкаста
+        public bool isLookAtPlayer; 
+        public Transform rayPoint; //начальная точка луча
         
 
         private void Start()
@@ -30,41 +30,40 @@ namespace Tanks
 
         private void FixedUpdate()
         {
-            Ray1();
+            BotVision();
         }
 
 
-        public void Verrt(DirectionType playerDirecrionType)
+        public void BotLogicVision(DirectionType playerDirecrionType)
         {
             m_direction = Extensions.GetRandomDirecrion();
             StopAllCoroutines();
             if (isLookAtPlayer)
             {
                 m_direction = playerDirecrionType;
-                Debug.Log("Hunt");
             }
             SetRandomTime();
             StartCoroutine(ApplyDirection());
-        }
+        } //основные шаги зрения бота
         
       
         private void SetRandomTime()
         {
             Random random = new Random();
             m_timeForMove = random.Next(10,m_maxTimeForMove) / 10;
-        }
+        } //установка рандомного время
 
-        private void Ray1()
+        private void BotVision()
         {
             Vector3 vec = Extensions.ConvertTypeFromDirection(m_direction);
             RaycastHit2D hit = Physics2D.Raycast(rayPoint.position, new Vector3(vec.x, vec.y), 0.1f);
             if (hit.transform.GetComponent<CellComponent>().DestroyCell == false || hit.transform.GetComponent<BotComponent>() == true)
             {
-                Verrt(DirectionType.Up);
+                BotLogicVision(DirectionType.Up);
             }
-        }
+        } //зрение бота
 
-        IEnumerator ApplyDirection()
+        IEnumerator ApplyDirection() //логика  движения бота
         {
             transform.eulerAngles = Extensions.ConvertTypeFromDRotation(m_direction);
             float time = m_timeForMove;
@@ -75,7 +74,7 @@ namespace Tanks
                 yield return null;
             }
             isLookAtPlayer = false;
-            Verrt(DirectionType.Up);
+            BotLogicVision(DirectionType.Up);
         }
     }
 }

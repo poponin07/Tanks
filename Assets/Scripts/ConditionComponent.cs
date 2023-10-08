@@ -7,7 +7,7 @@ namespace Tanks
 {
     public  class ConditionComponent : MonoBehaviour
     {
-        [SerializeField, Range(1, 500)] protected int m_health = 10;
+        [SerializeField, Range(1, 500)] protected int m_health = 10; //здоровье
         [SerializeField] private EnemyManagerComponent m_enemyManagerComponent;
         
         public EnemyManagerComponent EnemyManagerComponent
@@ -17,17 +17,15 @@ namespace Tanks
                 if (value != null ) m_enemyManagerComponent = value;
             }
         }
-        public virtual void SetDamage(int damage)
+        public virtual void SetDamage(int damage) // урона
         {
         m_health -= damage;
 
         if (m_health <= 0f)
         {
             m_enemyManagerComponent.RemoveEnemy(gameObject);
-                //Destroy(gameObject);
-        }
-        
-    }
 
+        }
+        }
     }
 }

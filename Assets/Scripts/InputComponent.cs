@@ -46,10 +46,10 @@ public class InputComponent : MonoBehaviour
 
     private void LateUpdate()
     {
-        Ray1();
+        BotProvocation();
     }
 
-    private void Ray1()
+    private void BotProvocation() //агр бота
     {
         Vector3 vec = Extensions.ConvertTypeFromDirection(m_lastType);
             RaycastHit2D hit = Physics2D.Raycast(rayPoint.position, new Vector3(vec.x, vec.y), 100f);
@@ -60,7 +60,7 @@ public class InputComponent : MonoBehaviour
                     direction = new Vector3(direction.x * -1f,  direction.y * -1f, 0f);
                     DirectionType directionType = Extensions.ConvertDirectionFromType(direction);
                     bot.isLookAtPlayer = true;
-                    bot.Verrt(directionType);
+                    bot.BotLogicVision(directionType);
                 }
             
     }

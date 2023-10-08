@@ -30,7 +30,7 @@ namespace Tanks
 
         
 
-        public override void SetDamage(int damage)
+        public override void SetDamage(int damage) //урон 
         {
             if (m_isImmortal) return;
             
@@ -47,7 +47,7 @@ namespace Tanks
 
         
         
-        private IEnumerator OnImmortal()
+        private IEnumerator OnImmortal() //режим бессмертия
         {
             m_isImmortal = true;
             var time = m_timeImmortal;

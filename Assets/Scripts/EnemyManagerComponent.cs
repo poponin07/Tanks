@@ -18,7 +18,7 @@ namespace Tanks
             AddEnemy(m_maxEnemy);
         }
 
-        public void RemoveEnemy(GameObject enemy) 
+        public void RemoveEnemy(GameObject enemy) //уничтожение бота
         {
             m_enemyes.Remove(enemy.gameObject);
             Destroy(enemy);
@@ -28,12 +28,12 @@ namespace Tanks
             }
         }
 
-        private void AddEnemy( int countEnemy)
+        private void AddEnemy( int countEnemy) //добавление бота
         {
             StartCoroutine(SpawnEnemy(countEnemy));
         }
 
-        private SpawnPointComponent GetFreeSpawnPoint()
+        private SpawnPointComponent GetFreeSpawnPoint() //возвращает свободную точка для спауна бота
         {
             SpawnPointComponent freePoint = null;
             foreach (var point in m_spawnPointComponents)
@@ -46,7 +46,7 @@ namespace Tanks
             return freePoint;
         }
 
-        private IEnumerator SpawnEnemy(int enemyCount)
+        private IEnumerator SpawnEnemy(int enemyCount) //спавн бота
         {
             for (int i = 0; i < enemyCount; i++)
             {
